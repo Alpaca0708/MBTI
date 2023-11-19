@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.banner {
+  width: 1440;
+  height: 284; 
+  flex-shrink: 0;
+  background: lightgray url('./Bubble.jpg') 50% / cover no-repeat;
+}
