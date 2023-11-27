@@ -9,6 +9,7 @@ import familyMembers from "./family-members.png";
 import {useState} from 'react';
 import { Button, ButtonGroup } from '@chakra-ui/react';
 
+import { ChakraProvider } from '@chakra-ui/react'
 
 
 
@@ -41,14 +42,40 @@ function App() {
       const newDate2 = e.target.value;
       setInputDate2(newDate2);
     }; 
-  
-  
 
+    const [matchData, setMatchData] = useState({
+        male:{
+        MBTI:'ENFJ',
+        Birthday:'2000/9/1',
+        Job:'nurse',
+        },
+  
+        female:{
+        MBTI:'INTJ',
+        Birthday:'1997/9/1',
+        Job:'monk',
+        },
 
+    });
+
+    const userData = (gender) =>{
+      const selectedData = matchData[gender];
+      console.log(selectedData);
+    };
+    
+    
+
+   
+
+    
 
   return (
+    <ChakraProvider>
+
     <div className="App">
-      <header style= {{ width: '100%', height: '260px', flexShrink: '0', alignItems: 'center', flexDirection: 'column', padding:'0px'}}>
+
+
+      <header style= {{ width: '100%', height: '200px', flexShrink: '0', alignItems: 'center', flexDirection: 'column', padding:'0px'}}>
         <img src={Bubble} alt = "Bubble" style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
         
       </header>
@@ -83,8 +110,8 @@ function App() {
 
           </div>
 
-
-          <div style={{ height: '20px',}}></div>
+{/* 
+          <div style={{ height: '20px',}}></div> */}
 
 
           <div style = {{display: 'inline-flex', flexDirection: 'column', alignItems: 'flex-start', gap: '5px',}}>
@@ -114,12 +141,13 @@ function App() {
             </div>
 
           </div>
-        </div>
+
+      </div>
 
 
           
       <div style = {{alignItems:'center',display:'flex',justifyContent:'center',marginTop:'30px'}}>
-      <footer style ={{width:'1032px', height:'291px', background: 'beige', display:'flex', justifyContent:'space-around', paddingTop: '25px', }}>
+      <footer style ={{width:'1032px', height:'291px',  display:'flex', justifyContent:'space-around', paddingTop: '15px', }}>
           
 
             <div style = {{flexDirection:'column',}}>  
@@ -137,7 +165,7 @@ function App() {
                 objectFit: 'cover', 
                 position: 'absolute', 
                 top: '-33%', 
-                left: '-32%', // 調整圖片的左邊距
+                // left: '-32%', // 調整圖片的左邊距
                 transform: 'translate(0, 0)', // 將變換設置為初始位置
                 
               }}/>
@@ -145,19 +173,21 @@ function App() {
 
               </div>
                 <div style = {{width: '185px', justifyContent:'center', display:'flex', flexWrap:'wrap',}}>
-                  <p style = {{color: 'var(--gray-700, #2D3748)',textAlign: 'center', fontFamily: 'Inter', fontSize: '16px', fontStyle: 'normal', fontWeight: '700', lineHeight: '20px',}}>Get your score how suitable to be Lover
-                  </p>
+                  <p style = {{color: 'var(--gray-700, #2D3748)',textAlign: 'center', fontFamily: 'Inter', fontSize: '16px', fontStyle: 'normal', fontWeight: '700', lineHeight: '20px',}}>Get your score how suitable to be Love</p>
+                  
                 </div>
 
                 <div>
                    
-                      <Button style= {{colorScheme:'teal', size:'sm'}}>
+                      <Button  colorScheme='yellow' style= {{  size:'sm'}}>
                           Get Report
                         </Button>
                      
                 </div>
 
             </div>
+
+            <div style= {{width: '1px', height: '190.003px',background: '#A9C6A4',}}></div>
 
               <div style = {{flexDirection:'column',}}> 
                   <div   style={{
@@ -174,7 +204,7 @@ function App() {
                     objectFit: 'cover', 
                     position: 'absolute', 
                     top: '-35%', 
-                    left: '-32%', // 調整圖片的左邊距
+                    left: '0%', // 調整圖片的左邊距
                     transform: 'translate(0, 0)', // 將變換設置為初始位置
                     
                   }}/>
@@ -186,7 +216,7 @@ function App() {
 
                         <div>
                           
-                              <Button style= {{colorScheme:'teal', size:'sm'}}>
+                              <Button colorScheme='yellow' style= {{ size:'sm'}}>
                                   Get Report
                                 </Button>
                             
@@ -194,6 +224,11 @@ function App() {
 
 
               </div>
+
+
+              <div style= {{width: '1px', height: '190.003px',background: '#A9C6A4',}}></div>
+
+
               <div style = {{flexDirection:'column',}}>
           
               <div   style={{
@@ -210,7 +245,7 @@ function App() {
                 objectFit: 'cover', 
                 position: 'absolute', 
                 top: '-35%', 
-                left: '-32%', // 調整圖片的左邊距
+                // left: '-32%', // 調整圖片的左邊距
                 transform: 'translate(0, 0)', // 將變換設置為初始位置
                 
               }}/>
@@ -223,9 +258,36 @@ function App() {
 
                 <div>
                    
-                      <Button style= {{colorScheme:'teal', size:'sm'}}>
+                      <Button  colorScheme='yellow' style= {{ size:'sm'}} onClick= {() =>userData('male' && 'female')}>
                           Get Report
                         </Button>
+                        <div style= {{
+                          // display: 'none',
+                          position: 'fixed',
+                          top: '0',
+                          left: '0',
+                          width: '100%',
+                          height: '100%',
+                          background: 'rgba(0, 0, 0, 0.5)', /* 半透明黑色遮罩 */
+                          zIndex: '999',
+                        }}>
+                          <div style ={{
+                                //  display: 'none',
+                                 position: 'fixed',
+                                 top: '50%',
+                                 left: '50%',
+                                 transform: 'translate(-50%, -50%)',
+                                 background: 'white',
+                                 padding: '20px',
+                                 zIndex: '1000',
+
+                          }}>
+
+                        <p>Match Data: {JSON.stringify(matchData)}</p>
+                           </div>
+                        </div>
+                        
+                        
                      
                 </div>
              </div>
@@ -242,6 +304,8 @@ function App() {
 
 
     </div>
+    </ChakraProvider>
+
   );
 }
 
@@ -253,3 +317,9 @@ export default App;
 
 //1.日期語言為中文
 //flex 說明 https://www.oxxostudio.tw/articles/201501/css-flexbox.html
+
+// click
+//   /
+// [button] 
+//    /
+//  take [object]
