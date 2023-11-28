@@ -16,20 +16,31 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {
 
+
   
-    const MBTIOption = ["INTJ", "INTP", "ENTJ", "ENTP", "INFJ", "INFP", "INFP", "ENFJ", "ENFP", "ISTJ", "ISFJ", "ESTJ", "ESFJ",
+    const MBTIOptions = ["INTJ", "INTP", "ENTJ", "ENTP", "INFJ", "INFP", "INFP", "ENFJ", "ENFP", "ISTJ", "ISFJ", "ESTJ", "ESFJ",
                     "ISTP", "ISFP", "ESTP", "ESFP" ]
-    const [inputValue, setInputValue] = useState('Type your job or position');   
-    const jobChange = (e) => {
-      const newValue = e.target.value;
-      setInputValue(newValue);
-    }; 
+
+//    const [MBTIOption, setMBTIOption] = useState('')  
+    const [selectMBTI,setSelectMBTI] = useState('') 
+    const MBTIChanged =(event) => {
+      setSelectMBTI(event.target.value);
+    };
+
+    const [selectMBTI2,setSelectMBTI2] = useState('') 
+    const MBTIChanged2 =(event) => {
+      setSelectMBTI2(event.target.value);
+    };
+    
+    const [inputValue, setInputValue] = useState('Type your job or position');    
+    const jobChange=(e) =>{
+      setInputValue(e.target.value)
+    };
     
     const [inputValue2, setInputValue2] = useState('Type your job or position')
-    const jobChange2 = (e) => {
-      const newValue = e.target.value;
-      setInputValue2(newValue);
-    }; 
+    const jobChange2 = (e) =>{
+      setInputValue2(e.target.value)
+    };
 
     const [inputDate, setInputDate] = useState ('')
     const dateChange = (e) => {
@@ -43,25 +54,25 @@ function App() {
       setInputDate2(newDate2);
     }; 
 
-    const [matchData, setMatchData] = useState({
-        male:{
-        MBTI:'ENFJ',
-        Birthday:'2000/9/1',
-        Job:'nurse',
-        },
+    // const [matchData, setMatchData] = useState({
+    //     male:{
+    //     MBTI:'ENFJ',
+    //     Birthday:'{inputDate}',
+    //     Job:'{inputValue}',
+    //     },
   
-        female:{
-        MBTI:'INTJ',
-        Birthday:'1997/9/1',
-        Job:'monk',
-        },
+    //     female:{
+    //     MBTI:'INTJ',
+    //     Birthday:'{inputDate2}',
+    //     Job:'{inputValue2}',
+    //     },
 
-    });
+    // });
 
-    const userData = (gender) =>{
-      const selectedData = matchData[gender];
-      console.log(selectedData);
-    };
+    // const userData = (gender) =>{
+    //   const selectedData = matchData[gender];
+    //   console.log(selectedData);
+    // };
     
     
 
@@ -80,7 +91,7 @@ function App() {
         
       </header>
 
-      <div style= {{display:'flex',}}>
+      <div style= {{display:'flex', alignItems:'center', justifyContent: 'center',}}>
 
           <div style = {{display: 'inline-flex', flexDirection: 'column', alignItems: 'flex-start', gap: '5px',}}>
             <header type={{color: 'var(--heading-title-color, #152536)', fontFamily: 'Lemonada', fontSize: '24px', fontStyle: 'normal', fontWeight: '575', lineHeight: 'normal',}}>Male</header>
@@ -90,13 +101,15 @@ function App() {
                     </div>
                     <div style= {{display: 'flex', width: '348px',padding: '33px 45px',flexDirection: 'column',justifyContent: 'center', alignItems: 'center', gap: '33px', alignSelf: 'stretch',}}>
                       
-                      <select style = {{width: '300px', height: '30px',borderRadius: '6px', border: '1px solid #58674F', opacity: '0.5', background: 'var(--white, #FFF)',}}>
+                      <select style = {{width: '300px', height: '30px',borderRadius: '6px', border: '1px solid #58674F', opacity: '0.5', background: 'var(--white, #FFF)',}}
                             
-                            {MBTIOption.map((option, index) =>(
-                              <option key={index} value={option}>
-                                {option}
-                                </option>
-                            ))} 
+                      value= {selectMBTI} onChange={MBTIChanged}>
+                          {MBTIOptions.map((option, index) =>(
+                            <option key={index} value={option}>
+                              {option}
+                              
+                              </option>
+                          ))}
                             
                       </select>
                           
@@ -124,11 +137,13 @@ function App() {
                       
                       <select style = {{width: '300px', height: '30px',borderRadius: '6px', border: '1px solid #58674F', opacity: '0.5', background: 'var(--white, #FFF)',}}>
                             
-                            {MBTIOption.map((option, index) =>(
-                              <option key={index} value={option}>
-                                {option}
-                                </option>
-                            ))} 
+                      value= {selectMBTI2} onChange={MBTIChanged2}
+                          {MBTIOptions.map((option, index) =>(
+                            <option key={index} value={option}>
+                              {option}
+                              
+                              </option>
+                          ))}
                             
                       </select>
                           
@@ -258,7 +273,7 @@ function App() {
 
                 <div>
                    
-                      <Button  colorScheme='yellow' style= {{ size:'sm'}} onClick= {() =>userData('male' && 'female')}>
+                      <Button  colorScheme='yellow' style= {{ size:'sm'}} >
                           Get Report
                         </Button>
                         <div style= {{
@@ -268,11 +283,11 @@ function App() {
                           left: '0',
                           width: '100%',
                           height: '100%',
-                          background: 'rgba(0, 0, 0, 0.5)', /* 半透明黑色遮罩 */
+                        // background: 'rgba(0, 0, 0, 0.5)', /* 半透明黑色遮罩 */
                           zIndex: '999',
                         }}>
                           <div style ={{
-                                //  display: 'none',
+                                 display: 'none',
                                  position: 'fixed',
                                  top: '50%',
                                  left: '50%',
@@ -283,9 +298,16 @@ function App() {
 
                           }}>
 
-                        <p>Match Data: {JSON.stringify(matchData)}</p>
+                        {/* <p>Match Data: {JSON.stringify(matchData)}</p> */}
                            </div>
                         </div>
+                        <div style={{display:'flex', justifyContent: 'center', alignItems: 'center',}}>
+                          <div style={{justifyContent: 'center', alignItems: 'center', width:'512px', height:'596px', border:'1px solid #000'}}>
+                          {/* condition ? expressionIfTrue : expressionIfFalse */}
+                          {selectMBTI}
+
+                          </div>
+                          </div>
                         
                         
                      
@@ -307,7 +329,7 @@ function App() {
     </ChakraProvider>
 
   );
-}
+  }                       
 
 export default App;
 
